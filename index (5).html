@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あなたの魂タイプ診断｜高次元と地球のバランス</title>
+<meta name="description" content="スピリチュアルを仕事にしたいあなたへ。「高次元」と「地球」のバランスからあなたの魂タイプを診断します。">
+<style>
+  :root{
+    --bg1:#1a1033; --bg2:#2b1a52; --bg3:#0d0820;
+    --accent:#c9a8ff; --accent2:#7be0d6; --gold:#f4d58d;
+    --text:#f2ecff; --muted:#b6a9d8; --card:rgba(255,255,255,.06);
+    --line:rgba(201,168,255,.25);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--text); line-height:1.7;
+    background:radial-gradient(1200px 600px at 50% -10%,#3a2470 0%,transparent 60%),
+               linear-gradient(160deg,var(--bg1),var(--bg3));
+    min-height:100vh;
+  }
+  .stars{position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:radial-gradient(1px 1px at 20% 30%,#fff,transparent),
+                     radial-gradient(1px 1px at 70% 20%,#fff,transparent),
+                     radial-gradient(1px 1px at 40% 70%,#cdbfff,transparent),
+                     radial-gradient(1px 1px at 85% 60%,#fff,transparent),
+                     radial-gradient(1px 1px at 55% 45%,#fff,transparent),
+                     radial-gradient(1px 1px at 10% 80%,#cdbfff,transparent);
+    opacity:.6;animation:tw 6s ease-in-out infinite alternate}
+  @keyframes tw{from{opacity:.35}to{opacity:.7}}
+  .wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:32px 20px 64px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;
+    padding:28px 24px;backdrop-filter:blur(8px);box-shadow:0 10px 40px rgba(0,0,0,.35)}
+  h1{font-size:1.8rem;line-height:1.4;margin:.2em 0 .4em;
+    background:linear-gradient(90deg,var(--gold),var(--accent),var(--accent2));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{color:var(--muted);font-size:1rem;margin-bottom:8px}
+  .eyebrow{letter-spacing:.18em;font-size:.72rem;color:var(--accent2);text-transform:uppercase}
+  .btn{display:block;width:100%;border:none;cursor:pointer;font-size:1.05rem;font-weight:700;
+    color:#1a1033;padding:16px;border-radius:14px;margin-top:20px;
+    background:linear-gradient(90deg,var(--gold),var(--accent));
+    transition:transform .15s ease,filter .15s ease}
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+  .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--line);font-weight:600}
+  .meta{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:.85rem;margin-top:18px}
+  .meta b{color:var(--text)}
+  /* progress */
+  .progress{height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;margin-bottom:6px}
+  .progress > i{display:block;height:100%;width:0;border-radius:99px;
+    background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width .3s ease}
+  .qcount{font-size:.8rem;color:var(--muted);text-align:right;margin-bottom:18px}
+  .qtext{font-size:1.25rem;font-weight:700;margin:6px 0 22px;min-height:2.2em}
+  .opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;
+    background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--text);
+    padding:14px 16px;border-radius:13px;margin-bottom:10px;font-size:1rem;
+    transition:background .15s,border-color .15s,transform .1s}
+  .opt:hover{background:rgba(201,168,255,.14);border-color:var(--accent);transform:translateX(2px)}
+  .opt .dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--accent);flex:0 0 auto}
+  .back{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.85rem;margin-top:8px}
+  .back:hover{color:var(--text)}
+  /* result */
+  .typebadge{text-align:center;margin-bottom:6px}
+  .typenum{font-size:.8rem;letter-spacing:.2em;color:var(--accent2)}
+  .typename{font-size:2rem;font-weight:800;margin:.1em 0;
+    background:linear-gradient(90deg,var(--gold),var(--accent2));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .typecatch{text-align:center;color:var(--muted);font-style:italic;margin-bottom:22px}
+  .matrix{position:relative;width:260px;height:260px;margin:10px auto 6px;
+    border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03)}
+  .matrix .axisx,.matrix .axisy{position:absolute;background:var(--line)}
+  .matrix .axisx{left:0;right:0;top:50%;height:1px}
+  .matrix .axisy{top:0;bottom:0;left:50%;width:1px}
+  .matrix .lab{position:absolute;font-size:.66rem;color:var(--muted)}
+  .matrix .lt{top:6px;left:50%;transform:translateX(-50%)}
+  .matrix .lb{bottom:6px;left:50%;transform:translateX(-50%)}
+  .matrix .ll{left:6px;top:50%;transform:translateY(-50%) rotate(-90deg);transform-origin:left}
+  .matrix .lr{right:6px;top:50%;transform:translateY(-50%) rotate(90deg);transform-origin:right}
+  .matrix .pt{position:absolute;width:20px;height:20px;border-radius:50%;
+    background:radial-gradient(circle,#fff,var(--accent));
+    box-shadow:0 0 18px 6px rgba(201,168,255,.7);transform:translate(-50%,-50%);
+    transition:left .6s ease,top .6s ease}
+  .bars{margin:18px 0}
+  .bar{margin-bottom:12px}
+  .bar .l{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:5px}
+  .bar .track{height:9px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden}
+  .bar .fill{height:100%;border-radius:99px;width:0;transition:width .8s ease}
+  .fill.h{background:linear-gradient(90deg,var(--accent),#a06bff)}
+  .fill.e{background:linear-gradient(90deg,var(--accent2),#3fb8aa)}
+  .sec{margin-top:22px}
+  .sec h3{font-size:1rem;color:var(--accent);margin:0 0 8px;display:flex;align-items:center;gap:8px}
+  .sec p,.sec li{color:var(--text);font-size:.96rem}
+  .sec ul{margin:0;padding-left:1.2em}
+  .cta{margin-top:26px;padding:22px;border-radius:16px;text-align:center;
+    background:linear-gradient(160deg,rgba(244,213,141,.14),rgba(123,224,214,.10));
+    border:1px solid var(--line)}
+  .cta h3{color:var(--gold);margin:0 0 8px}
+  .row{display:flex;gap:10px;margin-top:14px}
+  .row .btn{margin-top:0}
+  .footnote{color:var(--muted);font-size:.75rem;text-align:center;margin-top:24px}
+  .hidden{display:none}
+  .fade{animation:fade .4s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="wrap">
+
+  <!-- ===== START ===== -->
+  <section id="start" class="card fade">
+    <div class="eyebrow">SOUL TYPE DIAGNOSIS</div>
+    <h1>あなたの魂タイプ診断</h1>
+    <p class="lead">スピリチュアルを“仕事”にして羽ばたきたいあなたへ。</p>
+    <p>魂の才能を現実の豊かさに変えるカギは、<b>「高次元（受け取る力）」</b>と<b>「地球（形にする力）」</b>のバランス。<br>
+       12の質問から、いまのあなたの魂タイプと“次の一歩”を読み解きます。</p>
+    <div class="meta">
+      <span>⏱ <b>約2分</b></span>
+      <span>❓ <b>全12問</b></span>
+      <span>🔮 <b>8タイプ</b>で判定</span>
+    </div>
+    <button class="btn" onclick="App.start()">診断をはじめる</button>
+  </section>
+
+  <!-- ===== QUESTION ===== -->
+  <section id="quiz" class="card hidden">
+    <div class="progress"><i id="bar"></i></div>
+    <div class="qcount" id="qcount"></div>
+    <div class="qtext" id="qtext"></div>
+    <div id="opts"></div>
+    <button class="back" id="backBtn" onclick="App.back()">← 前の質問にもどる</button>
+  </section>
+
+  <!-- ===== RESULT ===== -->
+  <section id="result" class="card hidden"></section>
+
+</div>
+
+<script>
+const Questions = [
+  // axis: "H" = 高次元, "E" = 地球
+  {axis:"H", t:"理屈よりも「なんとなくこっち」という直感で物事を選ぶことが多い"},
+  {axis:"E", t:"やると決めたことを、期限内にきちんと形にできる"},
+  {axis:"H", t:"ふとアイデアやメッセージが“降りてくる”感覚がある"},
+  {axis:"E", t:"お金や数字の話を、避けずに向き合うことができる"},
+  {axis:"H", t:"自分の魂の役割や使命について考える時間が好きだ"},
+  {axis:"E", t:"自分のアイデアを「商品・サービス」に落とし込むのが得意だ"},
+  {axis:"H", t:"人の感情やその場の“エネルギー”を敏感に感じ取る"},
+  {axis:"E", t:"計画を立てて、コツコツ継続していくのは苦ではない"},
+  {axis:"H", t:"目に見えない世界（宇宙・ハイヤーセルフ等）とのつながりを感じる"},
+  {axis:"E", t:"人に「これいくらです」と価格を伝えて受け取ることに抵抗がない"},
+  {axis:"H", t:"五感を超えた“ビジョン”や世界観が、頭の中に広がることがある"},
+  {axis:"E", t:"集客・発信・仕組みづくりなど、現実的な行動に落とし込めている"},
+];
+
+const Scale = [
+  {t:"とても当てはまる", v:5},
+  {t:"やや当てはまる",   v:4},
+  {t:"どちらともいえない", v:3},
+  {t:"あまり当てはまらない", v:2},
+  {t:"まったく当てはまらない", v:1},
+];
+
+// band: 0=弱(L) 1=中(M) 2=強(H)  /  key = H band + "-" + E band
+const Types = {
+  "2-2":{n:1,name:"地に降りた光",ja:"統合者タイプ",catch:"天と地をつなぐ、起業準備の整った魂。",
+    str:["高次元のビジョンを、現実の形にして届ける力が両立している","在り方そのものに説得力があり、自然と人が集まる","“スピリチュアル×ビジネス”を体現できる稀有なポジション"],
+    stk:["完璧を求めすぎて、発信や値づけの一歩が遅れがち","与えすぎて、受け取る（お金・休息）が後回しになりやすい"],
+    next:"あなたに必要なのは“整える”ことより“広げる”こと。今ある才能を仕組み化し、より多くの人へ届けるフェーズです。"},
+  "2-1":{n:2,name:"光のメッセンジャー",ja:"伝え手タイプ",catch:"受け取った光を、言葉にして運ぶ人。",
+    str:["メッセージ性・世界観が豊かで、発信に向いている","人の心に届く“翻訳者”としての才能がある","土台は育ちつつあり、あと少しで形になる段階"],
+    stk:["伝えることはできても「お金にする導線」が弱い","発信が感覚的で、商品やオファーが定まりきらない"],
+    next:"鍵は“地球側”の地固め。あなたの言葉を「売れる商品・続く仕組み」に変換できれば一気に飛躍します。"},
+  "2-0":{n:3,name:"天空のビジョナリー",ja:"夢の預言者タイプ",catch:"誰よりも遠くの未来が視える、純度の高い魂。",
+    str:["受け取る力・世界観の広さは圧倒的","唯一無二のビジョンで人を惹きつける","本物のスピリチュアルな感性を持っている"],
+    stk:["お金・集客・現実化が大の苦手で、夢のまま終わりがち","地に足がつかず、エネルギーが拡散しやすい"],
+    next:"今のあなたの最重要テーマは“グラウンディング（地球とつながる）”。ビジョンを現実に降ろす伴走があれば、世界が動き出します。"},
+  "1-2":{n:4,name:"大地のクリエイター",ja:"現実構築タイプ",catch:"形にする力で、世界を建てる人。",
+    str:["実行力・継続力に優れ、すでに事業の土台がある","現実的な判断ができ、ビジネスが回せる","スピリチュアルな感性も着実に育っている"],
+    stk:["“自分らしい軸・メッセージ”がまだ言語化しきれていない","他者と似てしまい、独自性で差がつけにくい"],
+    next:"必要なのは“高次元との再接続”。あなたの内なるビジョンを掘り起こせば、ビジネスに魂が宿り、唯一無二になります。"},
+  "1-1":{n:5,name:"覚醒するバランサー",ja:"目覚め途上の調停者タイプ",catch:"両翼を育てている、伸びしろの人。",
+    str:["高次元と地球、どちらにも素直に開かれている","極端に偏らず、学んだことを統合できる","これから最も大きく変化・成長できる位置にいる"],
+    stk:["どちらも“中くらい”で、強みが定まらず迷いやすい","あれこれ手を出して、軸がぶれやすい"],
+    next:"今は“一点突破”が効くとき。まず一つの才能を尖らせると、もう一方も連動して伸び、統合者へと加速します。"},
+  "1-0":{n:6,name:"夢みるスターシード",ja:"芽吹き前タイプ",catch:"豊かな内なる世界を抱く、これからの星の種。",
+    str:["感受性が豊かで、独自の世界観を内に持っている","スピリチュアルへの探究心と素直さがある","余白が大きく、これからどうにでも育つ"],
+    stk:["インプットや内省は多いが、外に出す“行動”が止まりがち","現実化の経験がまだ少なく、自信が持ちにくい"],
+    next:"まずは“小さく形にして出す”体験から。発信や提供の一歩を踏み出せば、夢が現実に変わり始めます。"},
+  "0-2":{n:7,name:"現実派の探求者",ja:"目覚めはじめタイプ",catch:"確かな足場の上で、空を見上げはじめた人。",
+    str:["現実をしっかり生きる力・実務力がある","堅実で、決めたことをやり切れる","スピリチュアルへの扉が今まさに開きはじめている"],
+    stk:["“見えない世界”をどう仕事に活かすかが、まだ掴めていない","論理が先に立ち、直感や感性を後回しにしがち"],
+    next:"あなたの強い土台に“魂の物語”を重ねるフェーズ。内なる声を聴く習慣が、ありふれた事業を使命に変えます。"},
+  "0-1":{n:8,name:"目覚めの旅人",ja:"スタートラインタイプ",catch:"いま扉の前に立った、すべての始まりの魂。",
+    str:["「このままでいいの？」という気づきが芽生えている","まっさらで、どんな色にも染まれる伸びしろ","本当の自分を生きたいという純粋な願いがある"],
+    stk:["高次元・地球どちらの実感もまだ薄く、何から始めるか迷う","情報に振り回され、自信を持ちにくい"],
+    next:"焦らなくて大丈夫。まずは“自分を知る”ことから。土台と感性を同時に育てる地図があれば、旅は必ず前に進みます。"},
+  "0-0":{n:8,name:"目覚めの旅人",ja:"スタートラインタイプ",catch:"いま扉の前に立った、すべての始まりの魂。",
+    str:["「このままでいいの？」という気づきが芽生えている","まっさらで、どんな色にも染まれる伸びしろ","本当の自分を生きたいという純粋な願いがある"],
+    stk:["高次元・地球どちらの実感もまだ薄く、何から始めるか迷う","情報に振り回され、自信を持ちにくい"],
+    next:"焦らなくて大丈夫。まずは“自分を知る”ことから。土台と感性を同時に育てる地図があれば、旅は必ず前に進みます。"},
+};
+
+const App = {
+  i:0, answers:[],
+  el(id){return document.getElementById(id)},
+  show(id){["start","quiz","result"].forEach(s=>this.el(s).classList.toggle("hidden",s!==id));},
+  start(){this.i=0;this.answers=[];this.show("quiz");this.render();},
+  render(){
+    const q=Questions[this.i];
+    this.el("bar").style.width=((this.i)/Questions.length*100)+"%";
+    this.el("qcount").textContent=`Q${this.i+1} / ${Questions.length}`;
+    const qt=this.el("qtext");qt.textContent=q.t;qt.classList.remove("fade");void qt.offsetWidth;qt.classList.add("fade");
+    const opts=this.el("opts");opts.innerHTML="";
+    Scale.forEach(s=>{
+      const b=document.createElement("button");
+      b.className="opt";b.innerHTML=`<span class="dot"></span><span>${s.t}</span>`;
+      b.onclick=()=>this.answer(s.v);
+      opts.appendChild(b);
+    });
+    this.el("backBtn").style.visibility=this.i===0?"hidden":"visible";
+  },
+  answer(v){
+    this.answers[this.i]={axis:Questions[this.i].axis,v};
+    if(this.i<Questions.length-1){this.i++;this.render();}
+    else this.result();
+  },
+  back(){if(this.i>0){this.i--;this.render();}},
+  scores(){
+    let H=0,E=0,Hn=0,En=0;
+    this.answers.forEach(a=>{if(a.axis==="H"){H+=a.v;Hn++;}else{E+=a.v;En++;}});
+    // normalize each axis to 0..100 (min Hn*1, max Hn*5)
+    const norm=(sum,n)=>Math.round((sum-n)/ (n*4) *100);
+    return {H:norm(H,Hn), E:norm(E,En)};
+  },
+  band(v){return v<34?0:v<67?1:2;},
+  result(){
+    this.el("bar").style.width="100%";
+    const s=this.scores();
+    const key=this.band(s.H)+"-"+this.band(s.E);
+    const t=Types[key];
+    const px=s.E, py=100-s.H; // x:地球(right=strong), y:高次元(top=strong)
+    const r=this.el("result");
+    r.innerHTML=`
+      <div class="typebadge">
+        <div class="typenum">SOUL TYPE ${String(t.n).padStart(2,"0")} / 08</div>
+        <div class="typename">${t.name}</div>
+        <div class="lead" style="text-align:center;margin:0">${t.ja}</div>
+      </div>
+      <p class="typecatch">“${t.catch}”</p>
+
+      <div class="matrix">
+        <span class="axisx"></span><span class="axisy"></span>
+        <span class="lab lt">高次元・強</span><span class="lab lb">高次元・弱</span>
+        <span class="lab ll">地球・弱</span><span class="lab lr">地球・強</span>
+        <span class="pt" style="left:${10+px*0.8}%;top:${10+py*0.8}%"></span>
+      </div>
+
+      <div class="bars">
+        <div class="bar"><div class="l"><span>🔮 高次元（受け取る力）</span><b>${s.H}</b></div>
+          <div class="track"><div class="fill h" data-w="${s.H}"></div></div></div>
+        <div class="bar"><div class="l"><span>🌍 地球（形にする力）</span><b>${s.E}</b></div>
+          <div class="track"><div class="fill e" data-w="${s.E}"></div></div></div>
+      </div>
+
+      <div class="sec"><h3>✨ あなたの強み</h3><ul>${t.str.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+      <div class="sec"><h3>🌀 つまずきやすいポイント</h3><ul>${t.stk.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+      <div class="sec"><h3>🧭 次の一歩</h3><p>${t.next}</p></div>
+
+      <div class="cta">
+        <h3>“高次元と地球のバランス”を整えて、好きを仕事に</h3>
+        <p style="color:var(--text);margin:0">あなたのタイプに合わせた具体的なステップを、無料ガイド／個別セッションでお届けします。</p>
+        <a class="btn" href="https://utage-system.com/p/TTcQkvP6T2cY" target="_blank" rel="noopener" id="ctaBtn">▷ 無料で次の一歩を受け取る</a>
+      </div>
+
+      <div class="row">
+        <button class="btn ghost" onclick="App.shareResult('${t.name}')">結果をシェア</button>
+        <button class="btn ghost" onclick="App.start()">もう一度診断する</button>
+      </div>
+      <p class="footnote">※この診断は自己理解を深めるためのものです。</p>
+    `;
+    this.show("result");
+    requestAnimationFrame(()=>r.querySelectorAll(".fill").forEach(f=>f.style.width=f.dataset.w+"%"));
+  },
+  shareResult(name){
+    const text=`私の魂タイプは「${name}」でした🔮 あなたの魂タイプ診断`;
+    const url=location.href.split("#")[0];
+    if(navigator.share){navigator.share({title:"あなたの魂タイプ診断",text,url}).catch(()=>{});}
+    else{
+      const tw=`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+      window.open(tw,"_blank");
+    }
+  },
+};
+</script>
+</body>
+</html>
